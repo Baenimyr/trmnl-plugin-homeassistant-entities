@@ -1,0 +1,33 @@
+#
+# Changes to this file will be overwritten by `trmnlp pull`.
+#
+# Docs: https://help.usetrmnl.com/en/articles/10542599-importing-and-exporting-private-plugins#h_581fb988f0
+#
+---
+name: HASensors
+
+custom_fields:
+  - name: HomeAssistant URL
+    keyname: url
+    field_type: url
+    description: Your HomeAssistant server URL.
+  - name: HomeAssistant Token
+    keyname: token
+    field_type: string
+    description: A token linked to a User with `GET /api/states/` permission.
+  - name: Entities
+    keyname: entities_ids
+    field_type: multi_string
+    description: List of entity to monitor.
+
+strategy: polling
+polling_url: |
+  {% assign ids = entities_ids | split: "," %}{% for id in ids %}{{ url }}/api/states/{{ id }}
+  {% endfor %}
+polling_verb: get
+polling_headers: "Authorization=Bearer {{ token }}"
+
+no_screen_padding: 'no'
+dark_mode: 'no'
+static_data: '{}'
+refresh_interval: 120
