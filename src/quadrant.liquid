@@ -1,1 +1,32 @@
-quadrant!
+<style>
+    .tile {
+        margin: 2px;
+        padding: 6px;
+        padding-left: 2px;
+    }
+
+    .tile img {
+        width: 16px;
+        height: 22px;
+        margin: 2px;
+    }
+
+    .tile p {
+        font-size: var(--value-xxsmall-font-size);
+        line-height: var(--value-xxsmall-line-height);
+        font-weight: var(--value-xxsmall-font-weight);
+    }
+</style>
+<div class="w--full flex flex--row flex--left" style="flex-wrap: wrap">
+{% for id in (0..N) %}
+    {% if IDX_0 %}
+    {% render "tile" with IDX_0 as entity %}
+    {% endif %}
+    {% if IDX_1 %}
+    {% render "tile" with IDX_1 as entity %}
+    {% endif %}
+    {% if IDX_2 %}
+    {% render "tile" with IDX_2 as entity %}
+    {% endif %}
+{% endfor %}
+</div>
