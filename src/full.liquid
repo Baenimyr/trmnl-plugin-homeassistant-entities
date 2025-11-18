@@ -1,1 +1,13 @@
-full!
+<div class="w--full flex flex--row flex--left" style="flex-wrap: wrap">
+{% for id in (0..N) %}
+    {% if IDX_0 %}
+    {% render "tile" with IDX_0 as entity %}
+    {% endif %}
+    {% if IDX_1 %}
+    {% render "tile" with IDX_1 as entity %}
+    {% endif %}
+    {% if IDX_2 %}
+    {% render "tile" with IDX_2 as entity %}
+    {% endif %}
+{% endfor %}
+</div>

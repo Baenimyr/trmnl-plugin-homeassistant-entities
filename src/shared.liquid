@@ -1,0 +1,32 @@
+<style>
+	.tile {
+		display: grid;
+		border: 1px solid black;
+		border-radius: 5px;
+		min-width: fit-content;
+		margin: 4px;
+		padding: 8px;
+		padding-left: 2px;
+	}
+
+	.tile img {
+		width: 26px;
+		height: 34px;
+		margin: 4px
+	}
+</style>
+
+{% template tile %}
+<div class="no-shrink tile">
+	<div style="grid-row: 1;">
+		{% case entity.attributes.device_class %}
+		{% else %}
+		<img class="image image-stroke" src="https://usetrmnl.com/images/plugins/trmnl--render.svg" />
+		{% endcase %}
+	</div>
+	<div style="grid-row: 1;">
+		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name }}</strong></p>
+		<p class="text--black value value--xsmall">{{ entity.state }} {{ entity.attributes.unit_of_measurement}}</p>
+	</div>
+</div>
+{% endtemplate %}
