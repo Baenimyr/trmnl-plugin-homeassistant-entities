@@ -17,3 +17,4 @@ variables:
   IDX_0: {"state":"86.4","attributes":{"unit_of_measurement":"%","device_class":"humidity","friendly_name":"Room"}}
   IDX_1: {"state":"19.2","attributes":{"unit_of_measurement":"°C","device_class":"temperature","friendly_name":"Room"}}
   IDX_2: {"state":"120","attributes":{"unit_of_measurement":"W","device_class":"power","friendly_name":"Computer"}}
+  IDX_3: {"state":"233","attributes":{"unit_of_measurement":"ppm","device_class":"pm25","friendly_name":"Air quality"}}
