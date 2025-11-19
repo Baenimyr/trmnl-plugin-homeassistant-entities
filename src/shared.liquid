@@ -74,6 +74,16 @@
 		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name }}</strong></p>
 		<p class="text--black value value--xsmall">{{ entity.state }}</p>
 	</div>
+
+	{% else %}
+	{% comment %} Entité inconnue {% endcomment %}
+	<div style="grid-row: 1;">
+		<img class="image image-stroke" src="https://usetrmnl.com/images/plugins/trmnl--render.svg" />
+	</div>
+	<div style="grid-row: 1;">
+		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name | default: "??" }}</strong></p>
+		<p class="text--black value value--xsmall">{{ entity.state }}</p>
+	</div>
 	{% endif %}
 </div>
 {% endtemplate %}
