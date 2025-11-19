@@ -49,7 +49,11 @@
 	</div>
 	<div style="grid-row: 1;">
 		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name }}</strong></p>
+		{% if entity.attributes.unit_of_measurement %}
 		<p class="text--black value value--xsmall">{{ entity.state }} {{ entity.attributes.unit_of_measurement}}</p>
+		{% else %}
+		<p class="text--black value value--xsmall">{{ entity.state }}</p>
+		{% endif %}
 	</div>
 
 	{% elsif entity.state == "on" %}
