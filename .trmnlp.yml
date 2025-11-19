@@ -18,3 +18,7 @@ variables:
   IDX_1: {"state":"19.2","attributes":{"unit_of_measurement":"°C","device_class":"temperature","friendly_name":"Room"}}
   IDX_2: {"state":"120","attributes":{"unit_of_measurement":"W","device_class":"power","friendly_name":"Computer"}}
   IDX_3: {"state":"233","attributes":{"unit_of_measurement":"ppm","device_class":"pm25","friendly_name":"Air quality"}}
+  IDX_4:
+    state: "on"
+    attributes:
+      friendly_name: Switch
