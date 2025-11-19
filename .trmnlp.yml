@@ -22,3 +22,8 @@ variables:
     state: "on"
     attributes:
       friendly_name: Switch
+  IDX_5:
+    state: "on"
+    attributes:
+      device_class: 'door'
+      friendly_name: 'Door'
