@@ -27,3 +27,9 @@ variables:
     attributes:
       device_class: 'door'
       friendly_name: 'Door'
+  IDX_6:
+    state: "30"
+    attributes:
+      device_class: 'current'
+      friendly_name: 'Max Amp'
+      unit_of_measurement: 'A'
