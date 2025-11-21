@@ -12,25 +12,82 @@ SPDX-License-Identifier: Apache-2.0
 		padding-left: 2px;
 	}
 
-	.tile img {
+	.tile img, .tile svg {
 		width: 26px;
 		height: 34px;
 		margin: 4px
 	}
 </style>
 
+{% template icon %}
+{% case device_class %}
+{% when "battery" %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 2 12 20"><path d="M16 20H8V6H16M16.67 4H15V2H9V4H7.33C6.6 4 6 4.6 6 5.33V20.67C6 21.4 6.6 22 7.33 22H16.67C17.41 22 18 21.41 18 20.67V5.33C18 4.6 17.4 4 16.67 4M15 16H9V19H15V16M15 11.5H9V14.5H15V11.5Z" /></svg>
+{% when "current" %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12.43 11C12.28 10.84 10 7 7 7S2.32 10.18 2 11V13H11.57C11.72 13.16 14 17 17 17S21.68 13.82 22 13V11H12.43M7 9C8.17 9 9.18 9.85 10 11H4.31C4.78 10.17 5.54 9 7 9M17 15C15.83 15 14.82 14.15 14 13H19.69C19.22 13.83 18.46 15 17 15Z" /></svg>
+{% when "door" %}
+{% if state == "on" %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,3C10.89,3 10,3.89 10,5H3V19H2V21H22V19H21V5C21,3.89 20.11,3 19,3H12M12,5H19V19H12V5M5,11H7V13H5V11Z" /></svg>
+{% else %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16,11H18V13H16V11M12,3H19C20.11,3 21,3.89 21,5V19H22V21H2V19H10V5C10,3.89 10.89,3 12,3M12,5V19H19V5H12Z" /></svg>
+{% endif %}
+{% when "energy" %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 1 12 22"><path d="M11 15H6L13 1V9H18L11 23V15Z" /></svg>
+{% when "humidity" %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 2 12 20"><path d="M12,3.25C12,3.25 6,10 6,14C6,17.32 8.69,20 12,20A6,6 0 0,0 18,14C18,10 12,3.25 12,3.25M14.47,9.97L15.53,11.03L9.53,17.03L8.47,15.97M9.75,10A1.25,1.25 0 0,1 11,11.25A1.25,1.25 0 0,1 9.75,12.5A1.25,1.25 0 0,1 8.5,11.25A1.25,1.25 0 0,1 9.75,10M14.25,14.5A1.25,1.25 0 0,1 15.5,15.75A1.25,1.25 0 0,1 14.25,17A1.25,1.25 0 0,1 13,15.75A1.25,1.25 0 0,1 14.25,14.5Z" /></svg>
+{% when "pm1" or "pm4" or "pm10" or "pm25" %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M7.2,11.2C8.97,11.2 10.4,12.63 10.4,14.4C10.4,16.17 8.97,17.6 7.2,17.6C5.43,17.6 4,16.17 4,14.4C4,12.63 5.43,11.2 7.2,11.2M14.8,16A2,2 0 0,1 16.8,18A2,2 0 0,1 14.8,20A2,2 0 0,1 12.8,18A2,2 0 0,1 14.8,16M15.2,4A4.8,4.8 0 0,1 20,8.8C20,11.45 17.85,13.6 15.2,13.6A4.8,4.8 0 0,1 10.4,8.8C10.4,6.15 12.55,4 15.2,4Z" /></svg>
+{% when "power" %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 2 12 20"><path d="M7,2V13H10V22L17,10H13L17,2H7Z" /></svg>
+{% when "temperature" %}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="6 2 12 20"><path d="M15 13V5A3 3 0 0 0 9 5V13A5 5 0 1 0 15 13M12 4A1 1 0 0 1 13 5V8H11V5A1 1 0 0 1 12 4Z" /></svg>
+{% else %}
+<img class="image image-stroke" src="https://usetrmnl.com/images/plugins/trmnl--render.svg" />
+{% endcase %}
+{% endtemplate %}
+
 {% template tile %}
 <div class="no-shrink tile">
+	{% if entity.attributes.device_class %}
 	<div style="grid-row: 1;">
-		{% case entity.attributes.device_class %}
-		{% else %}
-		<img class="image image-stroke" src="https://usetrmnl.com/images/plugins/trmnl--render.svg" />
-		{% endcase %}
+	{% render "icon", device_class: entity.attributes.device_class, state: entity.state %}
 	</div>
 	<div style="grid-row: 1;">
 		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name }}</strong></p>
+		{% if entity.attributes.unit_of_measurement %}
 		<p class="text--black value value--xsmall">{{ entity.state }} {{ entity.attributes.unit_of_measurement}}</p>
+		{% else %}
+		<p class="text--black value value--xsmall">{{ entity.state }}</p>
+		{% endif %}
 	</div>
+
+	{% elsif entity.state == "on" %}
+	<div style="grid-row: 1;">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 0 16 24"><path d="M18.4 1.6C18 1.2 17.5 1 17 1H7C6.5 1 6 1.2 5.6 1.6C5.2 2 5 2.5 5 3V21C5 21.5 5.2 22 5.6 22.4C6 22.8 6.5 23 7 23H17C17.5 23 18 22.8 18.4 22.4C18.8 22 19 21.5 19 21V3C19 2.5 18.8 2 18.4 1.6M16 7C16 7.6 15.6 8 15 8H9C8.4 8 8 7.6 8 7V5C8 4.4 8.4 4 9 4H15C15.6 4 16 4.4 16 5V7Z" /></svg>
+	</div>
+	<div style="grid-row: 1;">
+		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name }}</strong></p>
+		<p class="text--black value value--xsmall">{{ entity.state }}</p>
+	</div>
+	{% elsif entity.state == "off" %}
+	<div style="grid-row: 1;">
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="4 0 16 24"><path d="M5.6 1.6C6 1.2 6.5 1 7 1H17C17.5 1 18 1.2 18.4 1.6C18.8 2 19 2.5 19 3V21C19 21.5 18.8 22 18.4 22.4C18 22.8 17.5 23 17 23H7C6.5 23 6 22.8 5.6 22.4C5.2 22 5 21.5 5 21V3C5 2.5 5.2 2 5.6 1.6M8 3C7.4 3 7 3.4 7 4V20C7 20.6 7.4 21 8 21H16C16.6 21 17 20.6 17 20V4C17 3.4 16.6 3 16 3H8M8 17C8 16.4 8.4 16 9 16H15C15.6 16 16 16.4 16 17V19C16 19.6 15.6 20 15 20H9C8.4 20 8 19.6 8 19V17Z" /></svg>
+	</div>
+	<div style="grid-row: 1;">
+		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name }}</strong></p>
+		<p class="text--black value value--xsmall">{{ entity.state }}</p>
+	</div>
+
+	{% else %}
+	{% comment %} Entité inconnue {% endcomment %}
+	<div style="grid-row: 1;">
+		<img class="image image-stroke" src="https://usetrmnl.com/images/plugins/trmnl--render.svg" />
+	</div>
+	<div style="grid-row: 1;">
+		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name | default: "??" }}</strong></p>
+		<p class="text--black value value--xsmall">{{ entity.state }}</p>
+	</div>
+	{% endif %}
 </div>
 {% endtemplate %}
 
