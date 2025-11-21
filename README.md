@@ -2,6 +2,8 @@
 Ce projet est un plugin pour TRMNL.
 Il affiche des entités de HomeAssistant comme la température, l’humidité ou la consommation d’énergie.
 
+![full](docs/full.png)
+
 Ce plugin utilise l’API REST de HomeAssistant `/api/states/<id>` pour récupérer la valeur de vos senseurs.
 ```json
 {
