@@ -1,10 +1,8 @@
+# Plugin affichant les entités Home Assistant.
 #
-# Changes to this file will be overwritten by `trmnlp pull`.
-#
-# Docs: https://help.usetrmnl.com/en/articles/10542599-importing-and-exporting-private-plugins#h_581fb988f0
-#
+# Utilise l’API REST de Home Assistant pour récupérer les classes et valeurs des entités.
 ---
-name: HASensors
+name: 'Home Assistant Sensors'
 
 custom_fields:
   - name: HomeAssistant URL
@@ -30,4 +28,4 @@ polling_headers: "Authorization=Bearer {{ token }}"
 no_screen_padding: 'no'
 dark_mode: 'no'
 static_data: '{}'
-refresh_interval: 120
+refresh_interval: 60
