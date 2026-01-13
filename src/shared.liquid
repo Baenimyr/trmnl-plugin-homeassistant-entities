@@ -90,8 +90,8 @@ SPDX-License-Identifier: Apache-2.0
 		<img class="image image-stroke" src="https://usetrmnl.com/images/plugins/trmnl--render.svg" />
 	</div>
 	<div style="grid-row: 1;">
-		<p class="text--black value value--xsmall"><strong>{{ entity.attributes.friendly_name | default: "??" }}</strong></p>
-		<p class="text--black value value--xsmall">{{ entity.state }}</p>
+		<p class="text--black value"><strong>{{ entity.attributes.friendly_name | default: "??" }}</strong></p>
+		<p class="text--black value">{{ entity.state }} {{ entity.attributes.unit_of_measurement}}</p>
 	</div>
 	{% endif %}
 </div>
