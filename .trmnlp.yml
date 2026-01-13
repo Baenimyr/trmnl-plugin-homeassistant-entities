@@ -22,16 +22,19 @@ variables:
   IDX_2: {"state":"120","attributes":{"unit_of_measurement":"W","device_class":"power","friendly_name":"Computer"}}
   IDX_3: {"state":"233","attributes":{"unit_of_measurement":"ppm","device_class":"pm25","friendly_name":"Air quality"}}
   IDX_4:
+    entity_id: switch.light
     state: "on"
     attributes:
       friendly_name: Switch
   IDX_5:
+    entity_id: sensor.door
     state: "on"
     attributes:
       device_class: 'door'
       friendly_name: 'Door'
   IDX_6:
-    state: "30"
+    entity_id: sensor.max_current
+    state: 30
     attributes:
       device_class: 'current'
       friendly_name: 'Max Amp'
