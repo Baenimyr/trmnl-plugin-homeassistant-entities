@@ -17,6 +17,22 @@ custom_fields:
     keyname: entities_ids
     field_type: multi_string
     description: List of entity to monitor.
+  - field_type: author_bio
+    keyname: readme
+    category: personal
+    name: HomeAssistant Tiles
+    description: |
+      Display HomeAssistant entities as small tiles.
+      <br><br>
+      This plugin is not meant for real-time monitoring. You can use it for daily statistics (last day energy consumption) or future alarms (EDF today and tomorrow color).
+      <br>
+      Use the name of the entity from HomeAssistant.
+      Each entity will use a default icon depending on its type or a 'mdi:…' icon defined in HomeAssistant.
+      <br>
+      <strong>Read-only Account</strong>
+      <br>
+      First create a custom HomeAssistant account for TRMNL, then edit the file .storage/auth and give it the group_ids ["system-read-only"]. Use this account to generate a token.
+    github_url: https://github.com/Baenimyr/trmnl-plugin-homeassistant-entities
 
 strategy: polling
 polling_url: |
